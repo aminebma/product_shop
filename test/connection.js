@@ -15,3 +15,9 @@ before(function(done){
     })
 
 })
+
+beforeEach(function(done){
+    mongoose.connection.collections.products.drop(function(){
+        done()
+    })
+})

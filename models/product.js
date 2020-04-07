@@ -5,7 +5,7 @@ const smartphoneSchema = new Schema({
     brand: {type: String, required: true},
     color: {type: String, required: true},
     model: {type: String, require: true}
-})
+}, {_id: false})
 
 const packSchema = new Schema({
     giftName: {type: String, required: true},
@@ -14,7 +14,7 @@ const packSchema = new Schema({
         smartPhone: smartphoneSchema,
         quantity: Number
     }]
-})
+}, {_id: false})
 
 const productSchema = new Schema({
     name: {type: String, required: true},
