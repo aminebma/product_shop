@@ -1,12 +1,15 @@
 const assert = require('assert')
 const mongoose = require('mongoose')
 const Product = require('../models/product')
+const Order = require('../models/order')
 
 describe('Saving products to database', function(){
     
     before(function(done){
         mongoose.connection.collections.products.drop(function(){
-            done()
+            mongoose.connection.collections.orders.drop(function(){
+                done()
+            })
         })
     })
 
@@ -76,19 +79,27 @@ describe('Saving products to database', function(){
         }
     })
 
+    const order1 = new Order({
+        num: 1,
+        date: '2020-04-09',
+        products: [product0,product3]
+    })
+
+    const order2 = new Order({
+        num: 2,
+        date: '2020-04-03',
+        products: [product1,product2]
+    })
+
     it('Saves a smartphone to the database', function(done){
 
         product0.save().then(function(){
-            assert(product0.isNew === false)
-        })
-
-        product1.save().then(function(){
-            assert(product1.isNew === false)
-        })
-
-        product2.save().then(function(){
-            assert(product2.isNew === false)
-            done()
+            product1.save().then(function(){
+                product2.save().then(function(){
+                    assert(product0.isNew===false && product1.isNew === false && product2.isNew === false)
+                    done()
+                })
+            })
         })
 
     })
@@ -98,6 +109,17 @@ describe('Saving products to database', function(){
         product3.save().then(function(){
             assert(product3.isNew === false)
             done()
+        })
+
+    })
+
+    it('Saves an order to the database', function(done){
+
+        order1.save().then(function(){
+            order2.save().then(function(){
+                assert(order1.isNew === false && order2.isNew === false)
+                done()
+            })
         })
 
     })

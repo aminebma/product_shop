@@ -11,6 +11,7 @@ const packSchema = new Schema({
     giftName: {type: String, required: true},
     giftQte: {type: Number, required: true},
     smartphoneList: [{
+        productId: Schema.Types.ObjectId,
         smartPhone: smartphoneSchema,
         quantity: Number
     }]
