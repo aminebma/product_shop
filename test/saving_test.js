@@ -82,13 +82,15 @@ describe('Saving products to database', function(){
     const order1 = new Order({
         num: 1,
         date: '2020-04-09',
-        products: [product0,product3]
+        products: [product0,product3],
+        amountPayed: 11.1
     })
 
     const order2 = new Order({
         num: 2,
         date: '2020-04-03',
-        products: [product1,product2]
+        products: [product1,product2],
+        amountPayed: 11.1
     })
 
     it('Saves a smartphone to the database', function(done){

@@ -5,7 +5,8 @@ const Product = require('./product')
 const orderSchema = new Schema({
     num: {type: Number, required: true},
     date: {type: Date, required: true},
-    products: {type: [Product.schema], required: true}
+    products: {type: [Product.schema], required: true},
+    amountPayed: {type: Number, required: true}
 })
 
 const Order = mongoose.model('order', orderSchema)
