@@ -1,4 +1,5 @@
-const Product = require('../models/smartphone')
+const Smartphone = require('../models/smartphone')
+const Pack = require('../models/pack')
 const Order = require('../models/order')
 const bodyParser = require('body-parser')
 
@@ -8,10 +9,16 @@ module.exports = function(app){
     app.use(bodyParser.urlencoded({extended:true}))
 
     app.get('/api/products', function(req, res){
+        let smartphonesList
         try{
-            Product.find({}, function(err, products){
+            Smartphone.find({}, function(err, smartphones){
                 if(err) throw err
-                res.send(products)
+                smartphonesList = smartphones
+            }).then(function(){
+                Pack.find({}, function(err, packs){
+                    if(err) throw err
+                    res.send({smartphonesList,packs})
+                })
             })
         }
         catch(err){
@@ -19,11 +26,23 @@ module.exports = function(app){
         }
     })
 
-    app.get('/api/product/:id', function(req, res){
+    app.get('/api/product/smartphone/:id', function(req, res){
         try{
-            Product.findById({_id: req.params.id}, function(err, product){
+            Smartphone.findById({_id: req.params.id}, function(err, smartphone){
                 if(err) throw err
-                res.send(product)
+                res.send(smartphone)
+            })
+        }
+        catch{
+            console.log(`Une erreur est survenue en récupérant le produit:\n${err}`)
+        }
+    })
+
+    app.get('/api/product/pack/:id', function(req, res){
+        try{
+            Pack.findById({_id: req.params.id}, function(err, pack){
+                if(err) throw err
+                res.send(pack)
             })
         }
         catch{
