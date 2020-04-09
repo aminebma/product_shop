@@ -26,6 +26,30 @@ module.exports = function(app){
         }
     })
 
+    app.get('/api/products/smartphones', function(req, res){
+        try{
+            Smartphone.find({}, function(err, smartphones){
+                if(err) throw err
+                res.send(smartphones)
+            })
+        }
+        catch(err){
+            console.log(`Une erreur est survenue en récupérant les produits:\n${err}`)
+        }
+    })
+
+    app.get('/api/products/packs', function(req, res){
+        try{
+            Pack.find({}, function(err, packs){
+                if(err) throw err
+                res.send(packs)
+            })
+        }
+        catch(err){
+            console.log(`Une erreur est survenue en récupérant les produits:\n${err}`)
+        }
+    })
+
     app.get('/api/product/smartphone/:id', function(req, res){
         try{
             Smartphone.findById({_id: req.params.id}, function(err, smartphone){
