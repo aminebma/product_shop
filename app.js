@@ -15,4 +15,4 @@ mongoose.connection.once('open',function(){
 
 apiController(app)
 
-app.listen(port)
+app.listen(port, '192.168.62.1')

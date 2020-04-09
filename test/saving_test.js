@@ -1,96 +1,99 @@
 const assert = require('assert')
 const mongoose = require('mongoose')
-const Product = require('../models/product')
+const Pack = require('../models/pack')
+const Smartphone = require('../models/smartphone')
 const Order = require('../models/order')
 
 describe('Saving products to database', function(){
     
     before(function(done){
-        mongoose.connection.collections.products.drop(function(){
-            mongoose.connection.collections.orders.drop(function(){
-                done()
+        mongoose.connection.collections.smartphones.drop(function(){
+            mongoose.connection.collections.packs.drop(function(){
+                mongoose.connection.collections.orders.drop(function(){
+                    done()
+                })
             })
         })
     })
 
-    const product0 = new Product({
+    const product0 = new Smartphone({
         name: 'TestS00',
         price: 11.1,
         qte: 5,
-        smartPhone: {
-            brand: 'TestS01',
-            color: 'TestS02',
-            model: 'TestS03'
-        }
+        brand: 'TestS01',
+        color: 'TestS02',
+        model: 'TestS03'
     })
 
-    const product1 = new Product({
+    const product1 = new Smartphone({
         name: 'TestS10',
         price: 11.1,
         qte: 5,
-        smartPhone: {
-            brand: 'TestS11',
-            color: 'TestS12',
-            model: 'TestS13'
-        }
+        brand: 'TestS11',
+        color: 'TestS12',
+        model: 'TestS13'
     })
 
-    const product2 = new Product({
+    const product2 = new Smartphone({
         name: 'TestS20',
         price: 11.1,
         qte: 5,
-        smartPhone: {
-            brand: 'TestS21',
-            color: 'TestS22',
-            model: 'TestS23'
-        }
+        brand: 'TestS21',
+        color: 'TestS22',
+        model: 'TestS23'
     })
 
-    const product3 = new Product({
+    const product3 = new Pack({
         name: 'TestP00',
         price: 11.1,
         qte: 5,
-        pack: {
-            giftName: 'TestP01',
-            giftQte: 1,
-            smartphoneList: [
-                {
-                    _id: product0._id,
-                    brand: 'TestS01',
-                    color: 'TestS02',
-                    model: 'TestS03',
-                    quantity: 1
-                },
-                {
-                    _id: product1._id,
-                    brand: 'TestS11',
-                    color: 'TestS12',
-                    model: 'TestS13',
-                    quantity: 2
-                },
-                {
-                    _id: product2._id,
-                    brand: 'TestS21',
-                    color: 'TestS22',
-                    model: 'TestS23',
-                    quantity: 3
-                }
-            ]
-        }
+        giftName: 'TestP01',
+        giftQte: 1,
+        smartphoneList: [
+            {
+                smartphone: product0,
+                quantity: 1
+            },
+            {
+                smartphone: product1,
+                quantity: 2                
+            },
+            {
+                smartphone: product2,
+                quantity: 3
+            }
+        ]
     })
 
     const order1 = new Order({
         num: 1,
         date: '2020-04-09',
-        products: [product0,product3],
-        amountPayed: 11.1
+        orderList: [
+            {
+                smartphone: product0,
+                qteOrder: 1
+            },
+            {
+                pack: product3,
+                qteOrder: 2
+            }
+        ],
+        amount: 11.1
     })
 
     const order2 = new Order({
         num: 2,
         date: '2020-04-03',
-        products: [product1,product2],
-        amountPayed: 11.1
+        orderList: [
+            {
+                smartphone: product1,
+                qteOrder: 1
+            },
+            {
+                smartphone: product2,
+                qteOrder: 2
+            }],
+        amount: 11.1
     })
 
     it('Saves a smartphone to the database', function(done){

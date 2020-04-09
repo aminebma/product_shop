@@ -1,5 +1,6 @@
 const assert = require('assert')
-const Product = require('../models/product')
+const Smartphone = require('../models/smartphone')
+const Pack = require('../models/pack')
 const Order = require('../models/order')
 
 describe('Finding records from database', function(){
@@ -8,21 +9,36 @@ describe('Finding records from database', function(){
 
         let i = 0
         const names = ['TestS00', 'TestS10', 'TestS20', 'TestP00']
-        Product.find({}).then(function(result){
+        Smartphone.find({}).then(function(result){
             result.forEach(function(item){
                 console.log(`Product name found: ${item.name}\nProduct name expected: ${names[i]}\n`)
                 assert(item.name === names[i])
                 i++
             })
+            Pack.find({}).then(function(result){
+                result.forEach(function(item){
+                    console.log(`Product name found: ${item.name}\nProduct name expected: ${names[i]}\n`)
+                    assert(item.name === names[i])
+                })
+                done()
+            })
+        })
+
+    })
+
+    it('Finds one smartphone on database', function(done){
+
+        Smartphone.findOne({name:'TestS00'}).then(function(result){
+            assert(result.name === 'TestS00')
             done()
         })
 
     })
 
-    it('Finds one product on database', function(done){
+    it('Finds one pack on database', function(done){
 
-        Product.findOne({name:'TestS00'}).then(function(result){
-            assert(result.name === 'TestS00')
+        Pack.findOne({name:'TestP00'}).then(function(result){
+            assert(result.name === 'TestP00')
             done()
         })
 

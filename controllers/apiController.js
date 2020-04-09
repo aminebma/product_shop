@@ -1,4 +1,4 @@
-const Product = require('../models/product')
+const Product = require('../models/smartphone')
 const Order = require('../models/order')
 const bodyParser = require('body-parser')
 
