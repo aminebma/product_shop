@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const Order = require('../models/order')
 const bodyParser = require('body-parser')
 
 module.exports = function(app){
@@ -14,7 +15,7 @@ module.exports = function(app){
             })
         }
         catch(err){
-            console.log('Une erreur est survenue.\n', err)
+            console.log(`Une erreur est survenue en récupérant les produits:\n${err}`)
         }
     })
 
@@ -26,15 +27,15 @@ module.exports = function(app){
             })
         }
         catch{
-            console.log('Une erreur est survenue.\n', err)
+            console.log(`Une erreur est survenue en récupérant le produit:\n${err}`)
         }
     })
 
-    app.post('/api/product', function(req, res){
+    /*app.post('/api/product', function(req, res){
 
         //TODO
 
-        /*if(req.body.id){
+        if(req.body.id){
             Product.findByIdAndUpdate(req.body.id, 
                 {
                     //TODO
@@ -52,7 +53,26 @@ module.exports = function(app){
                 if(err) throw err
                 res.send('Insertion: Success !')
             })
-        }*/
+        }
         
+    })*/
+
+    app.post('api/order', function(req,res){
+        const order = new Order({
+            num: req.body.num,
+            date: req.body.date,
+            products: req.body.products,
+            amountPayed: req.body.amountPayed
+        })
+        try{
+            Order.save(function(err){
+                if(err) throw err
+                res.send('Operation success !')
+            })
+        }
+        catch(err){
+            console.log(`Une erreur est survenue lors de l'ajout de la commande:\n${err}`)
+        }
     })
+
 }
