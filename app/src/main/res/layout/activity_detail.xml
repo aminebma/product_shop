@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D01D1B"
+    tools:context=".DetailActivity">
+
+    <TextView
+        android:id="@+id/montantFacture"
+        android:layout_width="234dp"
+        android:layout_height="31dp"
+        android:text="Montant facture"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/factureL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toEndOf="@+id/factureL" />
+
+    <TextView
+        android:id="@+id/factureL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="88dp"
+        android:text="Facture:"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/aVerse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="A versé:"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/factureL"
+        app:layout_constraintTop_toBottomOf="@+id/factureL" />
+
+    <EditText
+        android:id="@+id/montantVersement"
+        android:layout_width="291dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="48dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/aVerse"
+        app:layout_constraintTop_toBottomOf="@+id/aVerse" />
+
+    <TextView
+        android:id="@+id/da"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DA"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/montantVersement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/montantVersement" />
+
+    <TextView
+        android:id="@+id/resteAPayer"
+        android:layout_width="131dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="52dp"
+        android:text="Reste à payer:"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/montantVersement"
+        app:layout_constraintTop_toBottomOf="@+id/montantVersement" />
+
+    <TextView
+        android:id="@+id/montantRestant"
+        android:layout_width="205dp"
+        android:layout_height="34dp"
+        android:text="Montant restant"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/resteAPayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/resteAPayer" />
+
+    <Button
+        android:id="@+id/validateBtn"
+        android:layout_width="140dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="48dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:drawableEnd="@drawable/ic_fill_32"
+        android:text="Valider"
+        android:textColor="#B10000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
