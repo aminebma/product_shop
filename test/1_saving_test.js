@@ -66,7 +66,6 @@ describe('Saving products to database', function(){
         color: 'Gold',
         model: 'H99'
     })
-    
     const pack0 = new Pack({
         productType: 'Pack',
         name: 'Pack de fin d\'année',
@@ -76,7 +75,12 @@ describe('Saving products to database', function(){
         giftQte: 5,
         smartphoneList: [
             {
-                smartphone: smartphone1,
+                name: 'iPhone 11',
+                price: 180000,
+                qte: 7,
+                brand: 'Apple',
+                color: 'Noir',
+                model: 'AX11000',
                 quantity: 2
             }
         ]
@@ -91,11 +95,21 @@ describe('Saving products to database', function(){
         giftQte: 5,
         smartphoneList: [
             {
-                smartphone: smartphone2,
+                name: 'iPhone 11S',
+                price: 200000,
+                qte: 7,
+                brand: 'Apple',
+                color: 'Rouge',
+                model: 'AX11001',
                 quantity: 2
             },
             {
-                smartphone: smartphone4,
+                name: 'Mate 30 Pro',
+                price: 110000,
+                qte: 15,
+                brand: 'Huawei',
+                color: 'Gold',
+                model: 'H99',
                 quantity: 3                
             }
         ]
@@ -110,11 +124,22 @@ describe('Saving products to database', function(){
         giftQte: 12,
         smartphoneList: [
             {
-                smartphone: smartphone0,
+                name: 'Galaxy S20',
+                price: 150000,
+                qte: 12,
+                brand: 'Samsung',
+                color: 'Blanc',
+                model: 'G980',
+
                 quantity: 2
             },
             {
-                smartphone: smartphone1,
+                name: 'iPhone 11',
+                price: 180000,
+                qte: 7,
+                brand: 'Apple',
+                color: 'Noir',
+                model: 'AX11000',
                 quantity: 3                
             }
         ]
@@ -125,11 +150,42 @@ describe('Saving products to database', function(){
         date: '2020-04-09',
         orderList: [
             {
-                smartphone: smartphone0,
+                productType: 'Smartphone',
+                name: 'Galaxy S20',
+                price: 150000,
+                qte: 12,
+                brand: 'Samsung',
+                color: 'Blanc',
+                model: 'G980',
                 qteOrder: 1
             },
             {
-                pack: pack2,
+                productType: 'Pack',
+                name: 'Pack rentrée',
+                price: 500000,
+                qte: 12,
+                giftName: 'Spécial promo',
+                giftQte: 12,
+                smartphoneList: [
+                    {
+                        name: 'Galaxy S20',
+                        price: 150000,
+                        qte: 12,
+                        brand: 'Samsung',
+                        color: 'Blanc',
+                        model: 'G980',
+                        quantity: 2
+                    },
+                    {
+                        name: 'iPhone 11',
+                        price: 180000,
+                        qte: 7,
+                        brand: 'Apple',
+                        color: 'Noir',
+                        model: 'AX11000',
+                        quantity: 3                
+                    }
+                ],
                 qteOrder: 2
             }
         ],
@@ -141,11 +197,23 @@ describe('Saving products to database', function(){
         date: '2020-04-03',
         orderList: [
             {
-                smartphone: smartphone1,
+                productType: 'Smartphone',
+                name: 'iPhone 11',
+                price: 180000,
+                qte: 7,
+                brand: 'Apple',
+                color: 'Noir',
+                model: 'AX11000',
                 qteOrder: 1
             },
             {
-                smartphone: smartphone2,
+                productType: 'Smartphone',
+                name: 'iPhone 11S',
+                price: 200000,
+                qte: 7,
+                brand: 'Apple',
+                color: 'Rouge',
+                model: 'AX11001',
                 qteOrder: 2
             }],
         amount: 11.1

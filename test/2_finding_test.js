@@ -6,7 +6,6 @@ const Order = require('../models/order')
 describe('Finding records from database', function(){
 
     it('Finds all products on database', function(done){
-
         let i = 0
         const names = ['Galaxy S20', 'iPhone 11', 'iPhone 11S', '8T','Mate 30 Pro', 'Pack de fin d\'année', 'Pack de printemps', 'Pack rentrée']
         Smartphone.find({}).then(function(result){

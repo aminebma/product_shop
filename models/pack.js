@@ -10,8 +10,13 @@ const packSchema = new Schema({
     giftName: {type: String, required: true},
     giftQte: {type: Number, required: true},
     smartphoneList: [{
-        smartphone: Smartphone.schema,
-        quantity: Number
+        name: {type: String, required: true},
+        price: {type: Number, required: true},
+        qte: {type: Number, required: true},
+        brand: {type: String, required: true},
+        color: {type: String, required: true},
+        model: {type: String, require: true},
+        quantity: {type: Number, require: true}
     }]
 })
 
