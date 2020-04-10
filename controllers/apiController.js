@@ -9,15 +9,16 @@ module.exports = function(app){
     app.use(bodyParser.urlencoded({extended:true}))
 
     app.get('/api/products', function(req, res){
-        let smartphonesList
+        let productsList = []
         try{
             Smartphone.find({}, function(err, smartphones){
                 if(err) throw err
-                smartphonesList = smartphones
+                productsList.push(smartphones)
             }).then(function(){
                 Pack.find({}, function(err, packs){
                     if(err) throw err
-                    res.send({smartphonesList,packs})
+                    productsList.push(packs)
+                    res.send({productsList})
                 })
             })
         }

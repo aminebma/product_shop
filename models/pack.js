@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 const Smartphone = require('./smartphone')
 
 const packSchema = new Schema({
+    productType: {type: String, required:true},
     name: {type: String, required: true},
     price: {type: Number, required: true},
     qte: {type: Number, required: true},

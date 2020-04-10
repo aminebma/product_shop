@@ -17,33 +17,37 @@ describe('Saving products to database', function(){
     })
 
     const product0 = new Smartphone({
+        productType: 'Smartphone',
         name: 'TestS00',
         price: 11.1,
-        qte: 5,
+        Qte: 5,
         brand: 'TestS01',
         color: 'TestS02',
         model: 'TestS03'
     })
 
     const product1 = new Smartphone({
+        productType: 'Smartphone',
         name: 'TestS10',
         price: 11.1,
-        qte: 5,
+        Qte: 5,
         brand: 'TestS11',
         color: 'TestS12',
         model: 'TestS13'
     })
 
     const product2 = new Smartphone({
+        productType: 'Smartphone',
         name: 'TestS20',
         price: 11.1,
-        qte: 5,
+        Qte: 5,
         brand: 'TestS21',
         color: 'TestS22',
         model: 'TestS23'
     })
 
     const product3 = new Pack({
+        productType: 'Pack',
         name: 'TestP00',
         price: 11.1,
         qte: 5,
