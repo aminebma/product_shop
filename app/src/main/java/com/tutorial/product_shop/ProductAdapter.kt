@@ -41,7 +41,7 @@ class ProductAdapter(var context:Context, var data:List<OrderLine>):RecyclerView
         }
 
         holder.add.setOnClickListener{
-            if(data[position].qteOrder<data[position].product.Qte) {
+            if(data[position].qteOrder<data[position].product.qte) {
                 data[position].qteOrder++
             }
             notifyDataSetChanged()

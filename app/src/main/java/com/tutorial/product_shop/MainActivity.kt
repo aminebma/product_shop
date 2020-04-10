@@ -4,62 +4,70 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
-
-    private val smartphone1 = Smartphone("Samsung","Blanc","G980","Galaxy S20",150000L,10)
-    private val smartphone2 = Smartphone("Apple","Noir","AX11000","iPhone 11",180000L,7)
-    private val smartphone3 = Smartphone("Apple","Rouge","AX11001","iPhone 11S",200000L,7)
-    private val smartphone4 = Smartphone("One Plus","Bleu","OP5101","8T",130000L,7)
-    private val smartphone5 = Smartphone("Huawei","Gold","H99","Mate 30",110000L,7)
-    private val pack1:Pack=Pack(
-        "Gift Name 1",
-        5,
-        "Pack de rentrée",
-        500000,
-        5
-    )
-    private val pack2:Pack=Pack(
-        "Gift Name 2",
-        5,
-        "Pack de fin d\'année",
-        300000,
-        5
-    )
-    private val pack3:Pack=Pack(
-        "Gift Name 3",
-        5,
-        "Pack de printemps",
-        700000,
-        5
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ProductAdapter(this,loadData())
+
+        loadData()
     }
 
+    fun loadData() {
 
+        var data:MutableList<OrderLine> = mutableListOf()
 
-    fun loadData():List<OrderLine> {
-        val data = mutableListOf<OrderLine>()
+        val url = "http://10.0.2.2:3000/api/products"
+        val request = Request.Builder().url(url).build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object: Callback{
+            override fun onResponse(call: Call, response: Response) {
+                val body = response?.body?.string()
+                println(body)
+                try{
+                    val jsonObject = JSONArray(body)
+                    var products:MutableList<Any> = mutableListOf()
 
-        pack1.addSmartphone(smartphone1,2)
-        pack1.addSmartphone(smartphone2,3)
-        pack2.addSmartphone(smartphone2,2)
-        pack3.addSmartphone(smartphone3,2)
-        pack3.addSmartphone(smartphone5,3)
-        data.add(OrderLine(smartphone1,0))
-        data.add(OrderLine(pack1,0))
-        data.add(OrderLine(smartphone2,0))
-        data.add(OrderLine(pack2,0))
-        data.add(OrderLine(pack3,0))
-        data.add(OrderLine(smartphone3,0))
-        data.add(OrderLine(smartphone4,0))
-        data.add(OrderLine(smartphone5,0))
-        return data
+                    for(i in 0 until jsonObject.length())
+                        products.add(jsonObject[i])
+
+                    var productsList:MutableList<Any> = mutableListOf()
+                    var jsonProducts:JSONArray
+                    for(i in 0 until products.size){
+                        jsonProducts=JSONArray(products[i].toString())
+                        for(j in 0 until jsonProducts.length())
+                            productsList.add(jsonProducts[j])
+                    }
+
+                    var prod:JSONObject
+                    for(i in 0 until productsList.size){
+                        prod = JSONObject(productsList[i].toString())
+                        when(prod.get("productType")){
+                            "Smartphone" -> data.add(OrderLine(Smartphone(prod.getString("brand"), prod.getString("color"),
+                                                                prod.getString("model"), prod.getString("_id"), prod.getString("name"),
+                                                                prod.getLong("price"), prod.getInt("qte"))))
+                            "Pack" -> data.add(OrderLine(Pack(prod.getString("giftName"), prod.getInt("giftQte"), prod.getString("_id"),
+                                                                prod.getString("name"), prod.getLong("price"), prod.getInt("qte"))))
+                        }
+                    }
+                    println("Products loaded")
+                    runOnUiThread{
+                        recyclerView.adapter = ProductAdapter(this@MainActivity,data)
+                    }
+                }catch (e: Exception){
+                    println(e.message)
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                println("Failed to execute request.\n${e}")
+            }
+        })
     }
-
 }
