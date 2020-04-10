@@ -1,5 +1,4 @@
-const Smartphone = require('../models/smartphone')
-const Pack = require('../models/pack')
+const Product = require('../models/product')
 const Order = require('../models/order')
 const bodyParser = require('body-parser')
 
@@ -9,17 +8,10 @@ module.exports = function(app){
     app.use(bodyParser.urlencoded({extended:true}))
 
     app.get('/api/products', function(req, res){
-        let productsList = []
         try{
-            Smartphone.find({}, function(err, smartphones){
+            Product.find({}, function(err, products){
                 if(err) throw err
-                productsList.push(smartphones)
-            }).then(function(){
-                Pack.find({}, function(err, packs){
-                    if(err) throw err
-                    productsList.push(packs)
-                    res.send(productsList)
-                })
+                res.send(products)
             })
         }
         catch(err){
@@ -29,7 +21,7 @@ module.exports = function(app){
 
     app.get('/api/products/smartphones', function(req, res){
         try{
-            Smartphone.find({}, function(err, smartphones){
+            Product.find({productType: 'Smartphone'}, function(err, smartphones){
                 if(err) throw err
                 res.send(smartphones)
             })
@@ -41,7 +33,7 @@ module.exports = function(app){
 
     app.get('/api/products/packs', function(req, res){
         try{
-            Pack.find({}, function(err, packs){
+            Product.find({productType: 'Pack'}, function(err, packs){
                 if(err) throw err
                 res.send(packs)
             })
@@ -53,7 +45,7 @@ module.exports = function(app){
 
     app.get('/api/product/smartphone/:id', function(req, res){
         try{
-            Smartphone.findById({_id: req.params.id}, function(err, smartphone){
+            Product.findById({_id: req.params.id, productType: 'Smartphone'}, function(err, smartphone){
                 if(err) throw err
                 res.send(smartphone)
             })
@@ -65,7 +57,7 @@ module.exports = function(app){
 
     app.get('/api/product/pack/:id', function(req, res){
         try{
-            Pack.findById({_id: req.params.id}, function(err, pack){
+            Product.findById({_id: req.params.id, productType: 'Pack'}, function(err, pack){
                 if(err) throw err
                 res.send(pack)
             })
