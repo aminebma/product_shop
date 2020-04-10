@@ -8,7 +8,7 @@ describe('Finding records from database', function(){
     it('Finds all products on database', function(done){
 
         let i = 0
-        const names = ['TestS00', 'TestS10', 'TestS20', 'TestP00']
+        const names = ['Galaxy S20', 'iPhone 11', 'iPhone 11S', '8T','Mate 30 Pro', 'Pack de fin d\'année', 'Pack de printemps', 'Pack rentrée']
         Smartphone.find({}).then(function(result){
             result.forEach(function(item){
                 console.log(`Product name found: ${item.name}\nProduct name expected: ${names[i]}\n`)
@@ -19,6 +19,7 @@ describe('Finding records from database', function(){
                 result.forEach(function(item){
                     console.log(`Product name found: ${item.name}\nProduct name expected: ${names[i]}\n`)
                     assert(item.name === names[i])
+                    i++
                 })
                 done()
             })
@@ -28,8 +29,8 @@ describe('Finding records from database', function(){
 
     it('Finds one smartphone on database', function(done){
 
-        Smartphone.findOne({name:'TestS00'}).then(function(result){
-            assert(result.name === 'TestS00')
+        Smartphone.findOne({name:'Galaxy S20'}).then(function(result){
+            assert(result.name === 'Galaxy S20')
             done()
         })
 
@@ -37,8 +38,8 @@ describe('Finding records from database', function(){
 
     it('Finds one pack on database', function(done){
 
-        Pack.findOne({name:'TestP00'}).then(function(result){
-            assert(result.name === 'TestP00')
+        Pack.findOne({name:'Pack rentrée'}).then(function(result){
+            assert(result.name === 'Pack rentrée')
             done()
         })
 

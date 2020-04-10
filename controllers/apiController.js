@@ -18,7 +18,7 @@ module.exports = function(app){
                 Pack.find({}, function(err, packs){
                     if(err) throw err
                     productsList.push(packs)
-                    res.send({productsList})
+                    res.send(productsList)
                 })
             })
         }
