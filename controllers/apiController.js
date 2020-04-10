@@ -105,7 +105,7 @@ module.exports = function(app){
         const order = new Order({
             num: req.body.num,
             date: req.body.date,
-            products: req.body.products,
+            orderList: req.body.orderList,
             amountPayed: req.body.amountPayed
         })
         try{
