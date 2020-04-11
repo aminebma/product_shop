@@ -9,8 +9,6 @@ const productSchema = new Schema({
     brand: String,
     color: String,
     model: String,
-    giftName: String,
-    giftQte: Number,
     smartphoneList: [{
         name: {type: String, required: true},
         price: {type: Number, required: true},

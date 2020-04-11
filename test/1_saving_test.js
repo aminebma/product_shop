@@ -1,7 +1,5 @@
 const assert = require('assert')
 const mongoose = require('mongoose')
-const Pack = require('../models/pack')
-const Smartphone = require('../models/smartphone')
 const Product = require('../models/product')
 const Order = require('../models/order')
 
@@ -71,12 +69,10 @@ describe('Saving products to database', function(){
         price: 300000,
         qte: 5,
         giftName: 'Spécial promo',
-        giftQte: 5,
         smartphoneList: [
             {
                 name: 'iPhone 11',
                 price: 180000,
-                qte: 7,
                 brand: 'Apple',
                 color: 'Noir',
                 model: 'AX11000',
@@ -90,13 +86,10 @@ describe('Saving products to database', function(){
         name: 'Pack de printemps',
         price: 700000,
         qte: 5,
-        giftName: 'Spécial promo',
-        giftQte: 5,
         smartphoneList: [
             {
                 name: 'iPhone 11S',
                 price: 200000,
-                qte: 7,
                 brand: 'Apple',
                 color: 'Rouge',
                 model: 'AX11001',
@@ -105,7 +98,6 @@ describe('Saving products to database', function(){
             {
                 name: 'Mate 30 Pro',
                 price: 110000,
-                qte: 15,
                 brand: 'Huawei',
                 color: 'Gold',
                 model: 'H99',
@@ -119,23 +111,18 @@ describe('Saving products to database', function(){
         name: 'Pack rentrée',
         price: 500000,
         qte: 12,
-        giftName: 'Spécial promo',
-        giftQte: 12,
         smartphoneList: [
             {
                 name: 'Galaxy S20',
                 price: 150000,
-                qte: 12,
                 brand: 'Samsung',
                 color: 'Blanc',
                 model: 'G980',
-
                 quantity: 2
             },
             {
                 name: 'iPhone 11',
                 price: 180000,
-                qte: 7,
                 brand: 'Apple',
                 color: 'Noir',
                 model: 'AX11000',
@@ -156,13 +143,12 @@ describe('Saving products to database', function(){
 
     const order0 = new Order({
         num: 1,
-        date: '2020-04-09',
+        date: '2020-04-09 18:12:19',
         orderList: [
             {
                 productType: 'Smartphone',
                 name: 'Galaxy S20',
                 price: 150000,
-                qte: 12,
                 brand: 'Samsung',
                 color: 'Blanc',
                 model: 'G980',
@@ -172,14 +158,10 @@ describe('Saving products to database', function(){
                 productType: 'Pack',
                 name: 'Pack rentrée',
                 price: 500000,
-                qte: 12,
-                giftName: 'Spécial promo',
-                giftQte: 12,
                 smartphoneList: [
                     {
                         name: 'Galaxy S20',
                         price: 150000,
-                        qte: 12,
                         brand: 'Samsung',
                         color: 'Blanc',
                         model: 'G980',
@@ -188,7 +170,6 @@ describe('Saving products to database', function(){
                     {
                         name: 'iPhone 11',
                         price: 180000,
-                        qte: 7,
                         brand: 'Apple',
                         color: 'Noir',
                         model: 'AX11000',
@@ -198,18 +179,17 @@ describe('Saving products to database', function(){
                 qteOrder: 2
             }
         ],
-        amount: 11.1
+        amount: 125000
     })
 
     const order1 = new Order({
         num: 2,
-        date: '2020-04-03',
+        date: '2020-04-03 10:02:01',
         orderList: [
             {
                 productType: 'Smartphone',
                 name: 'iPhone 11',
                 price: 180000,
-                qte: 7,
                 brand: 'Apple',
                 color: 'Noir',
                 model: 'AX11000',
@@ -219,13 +199,12 @@ describe('Saving products to database', function(){
                 productType: 'Smartphone',
                 name: 'iPhone 11S',
                 price: 200000,
-                qte: 7,
                 brand: 'Apple',
                 color: 'Rouge',
                 model: 'AX11001',
                 qteOrder: 2
             }],
-        amount: 11.1
+        amount: 45000
     })
 
     const orders = []

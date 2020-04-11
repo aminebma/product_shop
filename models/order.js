@@ -2,26 +2,21 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const orderSchema = new Schema({
-    num: {type: Number, required: true},
     date: {type: Date, required: true},
     orderList: {type: [{
         productType: {type: String, required: true},
         name: {type: String, required: true},
         price: {type: Number, required: true},
-        qte: {type: Number, required: true},
         brand: String,
         color: String,
         model: String,
-        giftName: String,
-        giftQte: Number,
         smartphoneList: [{
             name: {type: String, required: true},
             price: {type: Number, required: true},
-            qte: {type: Number, required: true},
+            quantity: {type: Number, required: true},
             brand: String,
             color: String,
             model: String,
-            quantity: Number
         }],
         qteOrder: {type: Number, required: true}
     }], required: true},

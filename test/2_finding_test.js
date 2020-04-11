@@ -37,11 +37,12 @@ describe('Finding records from database', function(){
 
     it('Finds all orders on database', function(done){
 
-        let i = 1
+        let i = 0
+        const orders = [125000, 45000]
         Order.find({}).then(function(result){
             result.forEach(function(item){
-                console.log(`Order num found: ${item.num}\nOrder num expected: ${i}\n`)
-                assert(item.num === i)
+                console.log(`Order amount found: ${item.date}\nOrder amount expected: ${orders[i]}\n`)
+                assert(item.amount === orders[i])
                 i++
             })
             done()
@@ -51,8 +52,8 @@ describe('Finding records from database', function(){
 
     it('Finds one order on database', function(done){
 
-        Order.findOne({num:1}).then(function(result){
-            assert(result.num === 1)
+        Order.findOne({amount: 125000}).then(function(result){
+            assert(result.amount === 125000)
             done()
         })
 

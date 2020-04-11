@@ -9,7 +9,7 @@ module.exports = function(app){
 
     app.get('/api/products', function(req, res){
         try{
-            Product.find({}, function(err, products){
+            Product.find({qte: {$ne: 0}}, function(err, products){
                 if(err) throw err
                 res.send(products)
             })
@@ -93,15 +93,14 @@ module.exports = function(app){
         
     })*/
 
-    app.post('api/order', function(req,res){
+    app.post('/api/order', function(req,res){
         const order = new Order({
-            num: req.body.num,
             date: req.body.date,
             orderList: req.body.orderList,
-            amountPayed: req.body.amountPayed
+            amount: req.body.amount
         })
         try{
-            Order.save(function(err){
+            order.save(function(err){
                 if(err) throw err
                 res.send('Operation success !')
             })
