@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderSuccessActivity"></activity>
+        <activity android:name=".OrderStatusActivity"></activity>
         <activity android:name=".DetailActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

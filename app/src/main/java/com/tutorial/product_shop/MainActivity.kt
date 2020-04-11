@@ -29,32 +29,30 @@ class MainActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object: Callback{
             override fun onResponse(call: Call, response: Response) {
                 val body = response?.body?.string()
-                println(body)
                 try{
-                    val jsonObject = JSONArray(body)
-                    var products:MutableList<Any> = mutableListOf()
+                    val allProducts = JSONArray(body)
+                    for(i in 0 until allProducts.length()){
 
-                    for(i in 0 until jsonObject.length())
-                        products.add(jsonObject[i])
-
-                    var productsList:MutableList<Any> = mutableListOf()
-                    var jsonProducts:JSONArray
-                    for(i in 0 until products.size){
-                        jsonProducts=JSONArray(products[i].toString())
-                        for(j in 0 until jsonProducts.length())
-                            productsList.add(jsonProducts[j])
-                    }
-
-                    var prod:JSONObject
-                    for(i in 0 until productsList.size){
-                        prod = JSONObject(productsList[i].toString())
-                        when(prod.get("productType")){
-                            "Smartphone" -> data.add(OrderLine(Smartphone(prod.getString("brand"), prod.getString("color"),
-                                                                prod.getString("model"), prod.getString("_id"), prod.getString("name"),
-                                                                prod.getLong("price"), prod.getInt("qte"))))
-                            "Pack" -> data.add(OrderLine(Pack(prod.getString("giftName"), prod.getInt("giftQte"), prod.getString("_id"),
-                                                                prod.getString("name"), prod.getLong("price"), prod.getInt("qte"))))
+                        try{
+                            when((allProducts[i] as JSONObject).get("productType")){
+                                "Smartphone" -> data.add(OrderLine(Smartphone((allProducts[i] as JSONObject).getString("brand"), (allProducts[i] as JSONObject).getString("color"),
+                                    (allProducts[i] as JSONObject).getString("model"), (allProducts[i] as JSONObject).getString("_id"), (allProducts[i] as JSONObject).getString("name"),
+                                    (allProducts[i] as JSONObject).getLong("price"), (allProducts[i] as JSONObject).getInt("qte"))))
+                                "Pack" -> {
+                                    val smartphoneListJSON = (allProducts[i] as JSONObject).getJSONArray("smartphoneList")
+                                    val smartphoneList:MutableMap<Smartphone,Int> = mutableMapOf()
+                                    for(j in 0 until smartphoneListJSON.length())
+                                        smartphoneList.put(Smartphone((smartphoneListJSON[j] as JSONObject).getString("brand"), (smartphoneListJSON[j] as JSONObject).getString("color"),
+                                            (smartphoneListJSON[j] as JSONObject).getString("model"), (smartphoneListJSON[j] as JSONObject).getString("_id"), (smartphoneListJSON[j] as JSONObject).getString("name"),
+                                            (smartphoneListJSON[j] as JSONObject).getLong("price"), (smartphoneListJSON[j] as JSONObject).getInt("qte")), (smartphoneListJSON[j] as JSONObject).getInt("quantity"))
+                                    data.add(OrderLine(Pack((allProducts[i] as JSONObject).getString("giftName"), (allProducts[i] as JSONObject).getInt("giftQte"), smartphoneList ,(allProducts[i] as JSONObject).getString("_id"),
+                                        (allProducts[i] as JSONObject).getString("name"), (allProducts[i] as JSONObject).getLong("price"), (allProducts[i] as JSONObject).getInt("qte"))))
+                                }
+                            }
+                        }catch(ex: Exception){
+                            println(ex.message)
                         }
+
                     }
                     println("Products loaded")
                     runOnUiThread{

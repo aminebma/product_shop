@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D01D1B"
-    tools:context=".OrderSuccessActivity">
+    tools:context=".OrderStatusActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/statusIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/ic_fill_22" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/statusText"
         android:layout_width="163dp"
         android:layout_height="85dp"
         android:layout_marginTop="64dp"
@@ -28,7 +28,20 @@
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon" />
+
+    <Button
+        android:id="@+id/homeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:background="#FFFFFF"
+        android:text="Retour"
+        android:textColor="#8A0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
