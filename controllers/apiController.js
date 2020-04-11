@@ -94,12 +94,12 @@ module.exports = function(app){
     })*/
 
     app.post('/api/order', function(req,res){
-        const order = new Order({
-            date: req.body.date,
-            orderList: req.body.orderList,
-            amount: req.body.amount
-        })
         try{
+            const order = new Order({
+                date: req.body.date,
+                orderList: req.body.orderList,
+                amount: req.body.amount
+            })
             order.save(function(err){
                 if(err) throw err
                 res.send('Operation success !')

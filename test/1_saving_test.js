@@ -73,6 +73,7 @@ describe('Saving products to database', function(){
             {
                 name: 'iPhone 11',
                 price: 180000,
+                qte: 7,
                 brand: 'Apple',
                 color: 'Noir',
                 model: 'AX11000',
@@ -90,6 +91,7 @@ describe('Saving products to database', function(){
             {
                 name: 'iPhone 11S',
                 price: 200000,
+                qte: 7,
                 brand: 'Apple',
                 color: 'Rouge',
                 model: 'AX11001',
@@ -98,6 +100,7 @@ describe('Saving products to database', function(){
             {
                 name: 'Mate 30 Pro',
                 price: 110000,
+                qte: 15,
                 brand: 'Huawei',
                 color: 'Gold',
                 model: 'H99',
@@ -115,6 +118,7 @@ describe('Saving products to database', function(){
             {
                 name: 'Galaxy S20',
                 price: 150000,
+                qte: 12,
                 brand: 'Samsung',
                 color: 'Blanc',
                 model: 'G980',
@@ -123,6 +127,7 @@ describe('Saving products to database', function(){
             {
                 name: 'iPhone 11',
                 price: 180000,
+                qte: 7,
                 brand: 'Apple',
                 color: 'Noir',
                 model: 'AX11000',
