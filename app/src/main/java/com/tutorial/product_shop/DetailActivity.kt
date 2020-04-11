@@ -64,8 +64,6 @@ class DetailActivity : AppCompatActivity() {
                         productData.put("productType", "Pack")
                         productData.put("name",product.name)
                         productData.put("price",product.price)
-                        productData.put("giftName", product.giftName)
-                        productData.put("giftQte", product.giftQte)
                         for(smartphone in product.smartphoneList){
                             smartphoneData = JSONObject()
                             smartphoneData.put("name",smartphone.key.name)

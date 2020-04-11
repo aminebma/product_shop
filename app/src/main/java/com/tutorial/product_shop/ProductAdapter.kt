@@ -48,21 +48,11 @@ class ProductAdapter(var context:Context, var data:List<OrderLine>):RecyclerView
             notifyDataSetChanged()
         }
 
-        holder.min.setOnClickListener{
-            if(data[position].qteOrder>0){
+        holder.min.setOnClickListener {
+            if (data[position].qteOrder > 0) {
                 data[position].qteOrder--
             }
             notifyDataSetChanged()
-        }
-
-        holder.itemView.setOnClickListener {
-            val ordersList = mutableListOf<OrderLine>()
-            for(item in data)
-                if(item.qteOrder>0) ordersList.add(item)
-            val order = Order(SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date()), ordersList)
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("order", order)
-            context.startActivity(intent)
         }
     }
 
